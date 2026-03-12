@@ -51,6 +51,7 @@
             this.siso = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
+            this.btn_search = new System.Windows.Forms.Button();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -63,6 +64,7 @@
             // groupBox2
             // 
             this.groupBox2.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.groupBox2.Controls.Add(this.btn_search);
             this.groupBox2.Controls.Add(this.textBox3);
             this.groupBox2.Controls.Add(this.label7);
             this.groupBox2.Controls.Add(this.dataGridView1);
@@ -71,6 +73,7 @@
             this.groupBox2.Size = new System.Drawing.Size(1117, 1061);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
+            this.groupBox2.Enter += new System.EventHandler(this.groupBox2_Enter);
             // 
             // dataGridView1
             // 
@@ -288,15 +291,29 @@
             this.textBox3.Name = "textBox3";
             this.textBox3.Size = new System.Drawing.Size(528, 31);
             this.textBox3.TabIndex = 4;
+            this.textBox3.TextChanged += new System.EventHandler(this.textBox3_TextChanged);
             // 
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(815, 33);
+            this.label7.Location = new System.Drawing.Point(267, 0);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(47, 25);
+            this.label7.Size = new System.Drawing.Size(290, 25);
             this.label7.TabIndex = 3;
-            this.label7.Text = "Tìm";
+            this.label7.Text = "Tìm kiếm (Tên, mã lớp, khoa)";
+            this.label7.Click += new System.EventHandler(this.label7_Click);
+            // 
+            // btn_search
+            // 
+            this.btn_search.BackColor = System.Drawing.SystemColors.Desktop;
+            this.btn_search.ForeColor = System.Drawing.Color.Snow;
+            this.btn_search.Location = new System.Drawing.Point(832, 24);
+            this.btn_search.Name = "btn_search";
+            this.btn_search.Size = new System.Drawing.Size(101, 43);
+            this.btn_search.TabIndex = 5;
+            this.btn_search.Text = "Tìm";
+            this.btn_search.UseVisualStyleBackColor = false;
+            this.btn_search.Click += new System.EventHandler(this.btn_search_Click);
             // 
             // frm_Quanlylophoc
             // 
@@ -344,5 +361,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn siso;
         private System.Windows.Forms.TextBox textBox3;
         private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Button btn_search;
     }
 }

@@ -52,8 +52,9 @@
             this.ngaysinh = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.gioitinh = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.lop = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.label7 = new System.Windows.Forms.Label();
+            this.btn_search = new System.Windows.Forms.Button();
             this.textBox3 = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -287,6 +288,7 @@
             // groupBox2
             // 
             this.groupBox2.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.groupBox2.Controls.Add(this.btn_search);
             this.groupBox2.Controls.Add(this.textBox3);
             this.groupBox2.Controls.Add(this.label7);
             this.groupBox2.Controls.Add(this.dataGridView1);
@@ -332,22 +334,32 @@
             this.lop.Name = "lop";
             this.lop.Width = 200;
             // 
-            // label7
+            // btn_search
             // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(872, 32);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(47, 25);
-            this.label7.TabIndex = 1;
-            this.label7.Text = "Tìm";
-            this.label7.Click += new System.EventHandler(this.label7_Click);
+            this.btn_search.BackColor = System.Drawing.SystemColors.Desktop;
+            this.btn_search.ForeColor = System.Drawing.Color.Snow;
+            this.btn_search.Location = new System.Drawing.Point(786, 37);
+            this.btn_search.Name = "btn_search";
+            this.btn_search.Size = new System.Drawing.Size(101, 43);
+            this.btn_search.TabIndex = 8;
+            this.btn_search.Text = "Tìm";
+            this.btn_search.UseVisualStyleBackColor = false;
             // 
             // textBox3
             // 
-            this.textBox3.Location = new System.Drawing.Point(329, 29);
+            this.textBox3.Location = new System.Drawing.Point(226, 43);
             this.textBox3.Name = "textBox3";
             this.textBox3.Size = new System.Drawing.Size(528, 31);
-            this.textBox3.TabIndex = 2;
+            this.textBox3.TabIndex = 7;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(221, 13);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(388, 25);
+            this.label7.TabIndex = 6;
+            this.label7.Text = "Tìm kiếm (Tên, mã sinh viên, lớp, khoa)";
             // 
             // frm_Quanlysinhvien
             // 
@@ -397,6 +409,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn ngaysinh;
         private System.Windows.Forms.DataGridViewTextBoxColumn gioitinh;
         private System.Windows.Forms.DataGridViewTextBoxColumn lop;
+        private System.Windows.Forms.Button btn_search;
         private System.Windows.Forms.TextBox textBox3;
         private System.Windows.Forms.Label label7;
     }
