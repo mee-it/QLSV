@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36811.4 d17.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QLSV", "QLSV\QLSV.csproj", "{81C8371E-E9D9-4C7F-9D24-B5BD651074EE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{81C8371E-E9D9-4C7F-9D24-B5BD651074EE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{81C8371E-E9D9-4C7F-9D24-B5BD651074EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{81C8371E-E9D9-4C7F-9D24-B5BD651074EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{81C8371E-E9D9-4C7F-9D24-B5BD651074EE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {0755A1A3-8C3F-49DE-9AC4-597EF5F18ABF}
+	EndGlobalSection
+EndGlobal
