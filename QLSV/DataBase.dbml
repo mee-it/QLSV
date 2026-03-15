@@ -1,12 +1,33 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="qlsv" Class="DataBaseDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="AppSettings" ConnectionString="Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=qlsv;User ID=sa;Trust Server Certificate=True" SettingsObjectName="QLSV.Properties.Settings" SettingsPropertyName="qlsvConnectionString" Provider="System.Data.SqlClient" />
-  <Table Name="dbo.tbl_sinhvien" Member="tbl_sinhviens">
-    <Type Name="tbl_sinhvien">
-      <Column Name="id" Type="System.String" DbType="NChar(10) NOT NULL" CanBeNull="false" />
-      <Column Name="hoten" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="gioitinh" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
-      <Column Name="ngaysinh" Type="System.DateTime" DbType="Date" CanBeNull="true" />
-      <Column Name="malop" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
+  <Connection Mode="AppSettings" ConnectionString="Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=qlsv;User ID=sa;Encrypt=False;Trust Server Certificate=True" SettingsObjectName="QLSV.Properties.Settings" SettingsPropertyName="qlsvConnectionString1" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.tbl_Khoa" Member="tbl_Khoas">
+    <Type Name="tbl_Khoa">
+      <Column Name="MaKhoa" Type="System.String" DbType="VarChar(10) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="TenKhoa" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Association Name="tbl_Khoa_tbl_LopHoc" Member="tbl_LopHocs" ThisKey="MaKhoa" OtherKey="MaKhoa" Type="tbl_LopHoc" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbl_LopHoc" Member="tbl_LopHocs">
+    <Type Name="tbl_LopHoc">
+      <Column Name="MaLop" Type="System.String" DbType="VarChar(10) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="TenLop" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="MaKhoa" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="KhoaHoc" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="SiSo" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="GhiChu" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+      <Association Name="tbl_LopHoc_tbl_SinhVien" Member="tbl_SinhViens" ThisKey="MaLop" OtherKey="MaLop" Type="tbl_SinhVien" />
+      <Association Name="tbl_Khoa_tbl_LopHoc" Member="tbl_Khoa" ThisKey="MaKhoa" OtherKey="MaKhoa" Type="tbl_Khoa" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbl_SinhVien" Member="tbl_SinhViens">
+    <Type Name="tbl_SinhVien">
+      <Column Name="MaSV" Type="System.String" DbType="VarChar(10) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="HoTen" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="NgaySinh" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="GioiTinh" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
+      <Column Name="MaLop" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="IsDeleted" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Association Name="tbl_LopHoc_tbl_SinhVien" Member="tbl_LopHoc" ThisKey="MaLop" OtherKey="MaLop" Type="tbl_LopHoc" IsForeignKey="true" />
     </Type>
   </Table>
 </Database>

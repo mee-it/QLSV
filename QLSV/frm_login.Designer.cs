@@ -46,6 +46,7 @@
             this.label1.Size = new System.Drawing.Size(225, 45);
             this.label1.TabIndex = 0;
             this.label1.Text = "Đăng nhập";
+            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // label2
             // 
@@ -72,7 +73,7 @@
             this.txt_username.Location = new System.Drawing.Point(254, 100);
             this.txt_username.Name = "txt_username";
             this.txt_username.Size = new System.Drawing.Size(506, 31);
-            this.txt_username.TabIndex = 2;
+            this.txt_username.TabIndex = 1;
             this.txt_username.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // txt_password

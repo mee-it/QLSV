@@ -29,6 +29,9 @@
         private void InitializeComponent()
         {
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.btn_search = new System.Windows.Forms.Button();
+            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.btn_lammoi = new System.Windows.Forms.Button();
@@ -39,19 +42,12 @@
             this.txt_sisolop = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
+            this.txt_tenkhoa = new System.Windows.Forms.TextBox();
             this.txt_tenlop = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.txt_malop = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.txt_tenkhoa = new System.Windows.Forms.TextBox();
-            this.malop = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tenlop = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tenkhoa = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.siso = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.label7 = new System.Windows.Forms.Label();
-            this.btn_search = new System.Windows.Forms.Button();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -75,16 +71,41 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Enter += new System.EventHandler(this.groupBox2_Enter);
             // 
+            // btn_search
+            // 
+            this.btn_search.BackColor = System.Drawing.SystemColors.Desktop;
+            this.btn_search.ForeColor = System.Drawing.Color.Snow;
+            this.btn_search.Location = new System.Drawing.Point(832, 24);
+            this.btn_search.Name = "btn_search";
+            this.btn_search.Size = new System.Drawing.Size(101, 43);
+            this.btn_search.TabIndex = 5;
+            this.btn_search.Text = "Tìm";
+            this.btn_search.UseVisualStyleBackColor = false;
+            this.btn_search.Click += new System.EventHandler(this.btn_search_Click);
+            // 
+            // textBox3
+            // 
+            this.textBox3.Location = new System.Drawing.Point(272, 30);
+            this.textBox3.Name = "textBox3";
+            this.textBox3.Size = new System.Drawing.Size(528, 31);
+            this.textBox3.TabIndex = 4;
+            this.textBox3.TextChanged += new System.EventHandler(this.textBox3_TextChanged);
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(267, 0);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(290, 25);
+            this.label7.TabIndex = 3;
+            this.label7.Text = "Tìm kiếm (Tên, mã lớp, khoa)";
+            this.label7.Click += new System.EventHandler(this.label7_Click);
+            // 
             // dataGridView1
             // 
             this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.ButtonFace;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.malop,
-            this.tenlop,
-            this.tenkhoa,
-            this.siso});
-            this.dataGridView1.Location = new System.Drawing.Point(6, 79);
+            this.dataGridView1.Location = new System.Drawing.Point(-3, 57);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersWidth = 82;
             this.dataGridView1.RowTemplate.Height = 33;
@@ -197,6 +218,13 @@
             this.label3.TabIndex = 0;
             this.label3.Text = "Tên khoa";
             // 
+            // txt_tenkhoa
+            // 
+            this.txt_tenkhoa.Location = new System.Drawing.Point(39, 451);
+            this.txt_tenkhoa.Name = "txt_tenkhoa";
+            this.txt_tenkhoa.Size = new System.Drawing.Size(325, 31);
+            this.txt_tenkhoa.TabIndex = 1;
+            // 
             // txt_tenlop
             // 
             this.txt_tenlop.Location = new System.Drawing.Point(39, 315);
@@ -250,71 +278,6 @@
             this.splitContainer1.SplitterDistance = 561;
             this.splitContainer1.TabIndex = 1;
             // 
-            // txt_tenkhoa
-            // 
-            this.txt_tenkhoa.Location = new System.Drawing.Point(39, 451);
-            this.txt_tenkhoa.Name = "txt_tenkhoa";
-            this.txt_tenkhoa.Size = new System.Drawing.Size(325, 31);
-            this.txt_tenkhoa.TabIndex = 1;
-            // 
-            // malop
-            // 
-            this.malop.HeaderText = "Mã lớp";
-            this.malop.MinimumWidth = 10;
-            this.malop.Name = "malop";
-            this.malop.Width = 200;
-            // 
-            // tenlop
-            // 
-            this.tenlop.HeaderText = "Tên lớp";
-            this.tenlop.MinimumWidth = 10;
-            this.tenlop.Name = "tenlop";
-            this.tenlop.Width = 200;
-            // 
-            // tenkhoa
-            // 
-            this.tenkhoa.HeaderText = "Tên khoa";
-            this.tenkhoa.MinimumWidth = 10;
-            this.tenkhoa.Name = "tenkhoa";
-            this.tenkhoa.Width = 200;
-            // 
-            // siso
-            // 
-            this.siso.HeaderText = "Sĩ số";
-            this.siso.MinimumWidth = 10;
-            this.siso.Name = "siso";
-            this.siso.Width = 200;
-            // 
-            // textBox3
-            // 
-            this.textBox3.Location = new System.Drawing.Point(272, 30);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(528, 31);
-            this.textBox3.TabIndex = 4;
-            this.textBox3.TextChanged += new System.EventHandler(this.textBox3_TextChanged);
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(267, 0);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(290, 25);
-            this.label7.TabIndex = 3;
-            this.label7.Text = "Tìm kiếm (Tên, mã lớp, khoa)";
-            this.label7.Click += new System.EventHandler(this.label7_Click);
-            // 
-            // btn_search
-            // 
-            this.btn_search.BackColor = System.Drawing.SystemColors.Desktop;
-            this.btn_search.ForeColor = System.Drawing.Color.Snow;
-            this.btn_search.Location = new System.Drawing.Point(832, 24);
-            this.btn_search.Name = "btn_search";
-            this.btn_search.Size = new System.Drawing.Size(101, 43);
-            this.btn_search.TabIndex = 5;
-            this.btn_search.Text = "Tìm";
-            this.btn_search.UseVisualStyleBackColor = false;
-            this.btn_search.Click += new System.EventHandler(this.btn_search_Click);
-            // 
             // frm_Quanlylophoc
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
@@ -355,10 +318,6 @@
         private System.Windows.Forms.TextBox txt_malop;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.SplitContainer splitContainer1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn malop;
-        private System.Windows.Forms.DataGridViewTextBoxColumn tenlop;
-        private System.Windows.Forms.DataGridViewTextBoxColumn tenkhoa;
-        private System.Windows.Forms.DataGridViewTextBoxColumn siso;
         private System.Windows.Forms.TextBox textBox3;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Button btn_search;

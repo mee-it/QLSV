@@ -33,5 +33,16 @@ namespace QLSV.Properties {
                 return ((string)(this["qlsvConnectionString"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=qlsv;Persist Security Info=Tru" +
+            "e;User ID=sa;Password=123456;Encrypt=True;TrustServerCertificate=True")]
+        public string qlsvConnectionString1 {
+            get {
+                return ((string)(this["qlsvConnectionString1"]));
+            }
+        }
     }
 }

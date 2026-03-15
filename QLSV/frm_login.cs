@@ -40,7 +40,7 @@ namespace QLSV
             {
                 //đăng nhập thành công
                 // chuyển sang form chính
-                frm_main main = new frm_main();
+                frm_Quanlysinhvien main = new frm_Quanlysinhvien();
                 main.Show();
                 this.Hide();
             }
@@ -48,6 +48,11 @@ namespace QLSV
             {
                 MessageBox.Show("Đăng nhập thất bại!");
             }
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
