@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -151,7 +152,14 @@ namespace QLSV
                 sv.HoTen = txt_hoten.Text;
                 sv.NgaySinh = dtp_ngaysinh.Value;
                 sv.GioiTinh = cb_ngaysinh.Text;
-                sv.MaLop = txt_malop.Text;
+                if (cb_lop.SelectedValue != null)
+                {
+                    sv.MaLop = cb_lop.SelectedValue.ToString();
+                }
+                else
+                {
+                    sv.MaLop = null;
+                }
 
                 db.SubmitChanges();
 
@@ -191,6 +199,7 @@ namespace QLSV
             //hiển thị dữ liệu lên datagridview
 
             LoadSinhvien();
+            LoadComboBoxLop();
             ClearForm();
 
         }
@@ -212,6 +221,21 @@ namespace QLSV
 
             dataGridView1.DataSource = ds;
             FormatGrid();
+        }
+        private void LoadComboBoxLop()
+        {
+            var ds = (from lop in db.tbl_LopHocs
+                      select new
+                      {
+                          lop.MaLop,
+                          lop.TenLop
+                      }).ToList();
+
+            ds.Insert(0, new { MaLop = "", TenLop = "-- Chọn lớp --" });
+
+            cb_lop.DataSource = ds;
+            cb_lop.DisplayMember = "TenLop";
+            cb_lop.ValueMember = "MaLop";
         }
         private void FormatGrid()
         {
@@ -245,19 +269,27 @@ namespace QLSV
 
         private void button1_Click_1(object sender, EventArgs e)
         {
-            // Thêm sinh viên
+            // Lấy dữ liệu từ form
             tbl_SinhVien sv = GetSinhVienFromForm();
             if (sv == null) return;
 
-            // Kiểm tra mã lớp
-            var maLop = txt_malop.Text.Trim();
-            if (!db.tbl_LopHocs.Any(l => l.MaLop == maLop))
+            if (cb_lop.SelectedValue == null)
             {
-                MessageBox.Show("Mã lớp không tồn tại. Vui lòng chọn hoặc tạo lớp trước.");
+                MessageBox.Show("Vui lòng chọn lớp!");
                 return;
             }
 
-            // Tìm sinh viên có cùng MaSV
+            string maLop = cb_lop.SelectedValue.ToString();
+
+            // Kiểm tra mã lớp có tồn tại không
+            if (!db.tbl_LopHocs.Any(l => l.MaLop == maLop))
+            {
+                MessageBox.Show("Lớp không tồn tại!");
+                return;
+            }
+
+            sv.MaLop = maLop;
+
             var svCu = db.tbl_SinhViens.FirstOrDefault(x => x.MaSV == sv.MaSV);
 
             if (svCu != null)
@@ -274,8 +306,10 @@ namespace QLSV
                     {
                         svCu.HoTen = sv.HoTen;
                         svCu.NgaySinh = sv.NgaySinh;
+
                         svCu.GioiTinh = sv.GioiTinh;
-                        svCu.MaLop = sv.MaLop;
+
+                        svCu.MaLop = maLop;
                         svCu.IsDeleted = false;
 
                         db.SubmitChanges();
@@ -294,8 +328,8 @@ namespace QLSV
                 }
             }
 
-            // Nếu chưa tồn tại thì thêm mới
             sv.IsDeleted = false;
+            sv.MaLop = maLop;
             db.tbl_SinhViens.InsertOnSubmit(sv);
             db.SubmitChanges();
 
@@ -314,10 +348,13 @@ namespace QLSV
         {
             txt_masv.Text = "";
             txt_hoten.Text = "";
+
             dtp_ngaysinh.Value = DateTime.Today;
-            cb_ngaysinh.SelectedIndex = -1;
-            txt_lop.Text = "";
-            txt_malop.Text = "";
+
+            cb_ngaysinh.SelectedIndex = -1; 
+
+            cb_lop.SelectedIndex = -1; 
+
             txt_masv.Enabled = true;
 
             dataGridView1.ClearSelection();
@@ -328,19 +365,19 @@ namespace QLSV
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex < 0) return;
+
             var row = dataGridView1.Rows[e.RowIndex];
 
             txt_masv.Text = row.Cells["MaSV"].Value?.ToString() ?? "";
             txt_hoten.Text = row.Cells["HoTen"].Value?.ToString() ?? "";
             var ngs = row.Cells["NgaySinh"].Value;
-            if (DateTime.TryParse(ngs?.ToString(), out var d)) dtp_ngaysinh.Value = d;
+            if (DateTime.TryParse(ngs?.ToString(), out var d))
+                dtp_ngaysinh.Value = d;
             cb_ngaysinh.Text = row.Cells["GioiTinh"].Value?.ToString() ?? "";
-            txt_lop.Text = row.Cells["Lop"].Value?.ToString() ?? "";
-            if (dataGridView1.Columns["MaLop"] != null)
-                txt_malop.Text = row.Cells["MaLop"].Value?.ToString() ?? "";
+            if (row.Cells["MaLop"].Value != null)
+                cb_lop.SelectedValue = row.Cells["MaLop"].Value.ToString();
             else
-                txt_malop.Text = ""; // or derive from Lop
-
+                cb_lop.SelectedIndex = -1;
             txt_masv.Enabled = false;
         }
 
@@ -352,20 +389,22 @@ namespace QLSV
         private tbl_SinhVien GetSinhVienFromForm()
         {
             string gender = cb_ngaysinh?.Text ?? "";
-            if (string.IsNullOrWhiteSpace(txt_masv?.Text) || string.IsNullOrWhiteSpace(gender) ||
+
+            if (string.IsNullOrWhiteSpace(txt_masv?.Text) ||
                 string.IsNullOrWhiteSpace(txt_hoten?.Text) ||
-                string.IsNullOrWhiteSpace(txt_malop?.Text))
+                string.IsNullOrWhiteSpace(gender) ||
+                cb_lop.SelectedValue == null)
             {
                 MessageBox.Show("Vui lòng nhập đầy đủ thông tin!");
                 return null;
             }
-
-            var sv = new tbl_SinhVien {
+            var sv = new tbl_SinhVien
+            {
                 MaSV = txt_masv.Text.Trim(),
                 HoTen = txt_hoten.Text.Trim(),
                 NgaySinh = dtp_ngaysinh.Value,
-                GioiTinh = cb_ngaysinh.Text,
-                MaLop = txt_malop.Text.Trim()
+                GioiTinh = gender,
+                MaLop = cb_lop.SelectedValue.ToString()
             };
 
             return sv;
@@ -381,14 +420,16 @@ namespace QLSV
         }
         private void LoadSinhVienTheoTu(string tukhoa)
         {
-            string tk = tukhoa.Trim();
+            string tk = tukhoa.Trim().ToLower();
 
             var ds = (from sv in db.tbl_SinhViens
                       join lop in db.tbl_LopHocs on sv.MaLop equals lop.MaLop
-                      where sv.IsDeleted != true &&
-                           (sv.MaSV.Contains(tk) ||
-                            sv.HoTen.Contains(tk) ||
-                            lop.TenLop.Contains(tk))
+                      where (sv.IsDeleted == false || sv.IsDeleted == null) &&
+                            (
+                                (sv.MaSV ?? "").ToLower().Contains(tk) ||
+                                (sv.HoTen ?? "").ToLower().Contains(tk) ||
+                                (lop.TenLop ?? "").ToLower().Contains(tk)
+                            )
                       orderby sv.MaSV
                       select new
                       {
@@ -408,6 +449,18 @@ namespace QLSV
         {
             if (e.KeyCode == Keys.Enter)
                 btn_timkiem.PerformClick();
+        }
+
+        private void txt_timkiem_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btn_QLLH_Click(object sender, EventArgs e)
+        {
+            frm_Quanlylophoc frm = new frm_Quanlylophoc();
+            frm.Show();
+            this.Hide();
         }
     }
 }
